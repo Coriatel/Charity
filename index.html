@@ -4,153 +4,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>שקל ביום - שותפים להצלת חיים</title>
+    <title>שקל ביום - להחזיר את האור</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-
     <!-- Sticky Donate Button -->
-    <a href="#donate" class="sticky-donate">
-        <i class="fas fa-heart"></i> תרום עכשיו
-    </a>
+    <a href="#donate" class="sticky-donate-btn">תרום עכשיו</a>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <img src="assets/logo.jpg" alt="לוגו שקל ביום" class="logo">
-            <h1>הכוח של שקל אחד</h1>
-            <p class="subtitle">ביחד, השקלים הקטנים שלנו יוצרים שינוי ענק.</p>
-            <a href="#donate" class="cta-button pulse">הצטרף למהפכה - שקל ביום</a>
-        </div>
-        <div class="hero-image-container">
-            <img src="assets/hero.png" alt="ילד מחזיק קופה" class="hero-image">
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <img src="assets/logo.jpg" alt="לוגו מרכז נשמה" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#story">הסיפור</a></li>
+                    <li><a href="#goals">היעדים</a></li>
+                    <li><a href="#team">הצוות</a></li>
+                    <li><a href="#faq">שאלות ותשובות</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('assets/hero.png');">
+        <div class="hero-overlay">
+            <div class="container hero-content">
+                <h1>להחזיר את האור לבית שאיבד את דרכו</h1>
+                <p class="subtitle">אתם מכירים את המשפחה הזאת. אולי לא בשם, אבל אתם מכירים אותה בלב. הקמפיין הזה הוא לא
+                    סיפור על עוני, הוא סיפור על ערבות הדדית.</p>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-labels">
+                        <span id="raised-amount">₪0</span>
+                        <span id="goal-amount">יעד: ₪1,000,000</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <a href="#donate" class="cta-button">הצטרפו עכשיו</a>
+            </div>
+        </div>
+    </section>
+
     <!-- The Story -->
-    <section class="section story">
+    <section id="story" class="section story-section">
         <div class="container">
-            <h2>הסיפור שלנו</h2>
-            <p>דמיינו עולם שבו כל אחד נותן רק שקל אחד ביום. זה נשמע מעט, נכון? אבל כשאנחנו מתאחדים, השקל הזה הופך
-                למיליונים. זהו הכוח של הקהילה. זהו הכוח של הנתינה הקבועה.</p>
+            <h2>הסיפור שלהם, הסיפור של כולנו</h2>
+            <p>זו משפחה חמה, משפחה אוהבת, משפחה חסידית עם בית מלא בילדים, צחוק ושמחת חיים. משפחה כמו שלכם, כמו שלנו. הם
+                אף פעם לא ביקשו כלום, תמיד היו בצד הנותן. אבל החיים, במורכבות שלהם, הובילו אותם למקום שבו הם חייבים את
+                העזרה שלכם.</p>
+            <p>הבה נדמיין משפחה אחת, תוך הקפדה יתרה על צנעת הפרט. תארו לעצמכם בית שוקק חיים. משפחה נורמטיבית לחלוטין עם
+                הורים אוהבים וסביבה ביתית יציבה אך מתמודדת עם השלכות של מספר משברים שפקדו אותם בזמן קצר. משברים מסוגים
+                שונים שגרמו ללחץ הולך וגובר כלכלי ונפשי עד פגיעה ביכולת להתפרנס, כתוצאה מכך הלחץ הנפשי שוב גובר, ונוצר
+                מעגל כלכלי שלילי. זה יכול לקרות לכל אחד מאיתנו!</p>
         </div>
     </section>
 
     <!-- The Challenge -->
-    <section class="section challenge">
+    <section class="section challenge-section">
         <div class="container">
-            <h2>האתגר</h2>
-            <p>משפחות רבות בישראל נאבקות יום יום כדי לשרוד. המצוקה הכלכלית, הקושי הבריאותי, הבדידות - כל אלו הם הרים
-                גבוהים שקשה לטפס עליהם לבד.</p>
+            <h2>האתגר הכלכלי: טביעה שקטה</h2>
+            <p>מבחוץ, אולי לא רואים כלום. הם עדיין מחייכים, הילדים לבושים נקי, והם ממשיכים להיאחז בשגרה. אבל מאחורי הדלת
+                הסגורה, המציאות קורסת:</p>
+            <ul class="challenge-list">
+                <li><strong>חשבונות מעוקלים:</strong> אין גישה לכסף, אי אפשר לשלם את הדברים הבסיסיים ביותר.</li>
+                <li><strong>חובות דחופים:</strong> לספקים, לבעל הדירה, לחברות האשראי. טלפונים בלתי פוסקים.</li>
+                <li><strong>הוצאות רפואיות:</strong> טיפולים שהם חובה, אבל אין דרך לממן אותם.</li>
+                <li><strong>התמודדות מול הרשויות:</strong> בירוקרטיה מתישה שמוסיפה עוד משקל על הכתפיים.</li>
+                <li><strong>תחושת טביעה איטית:</strong> הרגשה שהם מאבדים אחיזה, שוקעים לאט, ואין מי שיראה וישמע.</li>
+            </ul>
         </div>
     </section>
 
     <!-- The Solution -->
-    <section class="section solution">
+    <section class="section solution-section">
         <div class="container">
-            <h2>הפתרון: שקל ביום</h2>
-            <p>אנחנו לא מבקשים תרומות ענק. אנחנו מבקשים שותפות. שקל אחד ביום, בהוראת קבע, מצטרף לאלפי שקלים אחרים ויוצר
-                רשת ביטחון חזקה עבור אלו שזקוקים לה ביותר.</p>
+            <h2>הפתרון: "שקל ביום" – כוחם של המעשים הקטנים!</h2>
+            <p>כאן אתם נכנסים לתמונה. אנחנו לא מבקשים מאף אחד לפתור את כל הבעיות לבד. הרעיון הוא פשוט, והוא מבוסס על
+                הכוח של ה"ביחד". אם כל אחד מאיתנו ייתן מעט, נוכל לחולל שינוי עצום.</p>
+            <div class="solution-points">
+                <p><strong>שקל אחד ביום.</strong> זה הכול. 30 שקלים בחודש בהוראת קבע. מחיר של שלוש כוסות קפה בחודש!</p>
+                <p>תוספת קטנה וחד-פעמית של 100 שקלים כדי לתת להם "אוויר לנשימה" מיידי.</p>
+                <p>100 שותפים כמוכם שיצטרפו ל"שקל ביום", וביחד אנחנו מעניקים למשפחה הזדמנות אמיתית לשיקום.</p>
+            </div>
+            <p class="highlight-text">השקל שלכם הוא לא רק שקל. הוא חבל הצלה, הוא קרש הצלה, הוא מסר של תקווה שאומר להם:
+                "אתם לא לבד".</p>
+            <p>כמובן שמי שיכול יותר מוזמן לתת לפי היכולת!</p>
         </div>
     </section>
 
     <!-- 3 Goals -->
-    <section class="section goals">
+    <section id="goals" class="section goals-section">
         <div class="container">
-            <h2>המטרות שלנו</h2>
+            <h2>שלושת יעדי הקמפיין: מנשימה ועד שיקום מלא</h2>
+            <p>לכל תרומה יש משמעות אדירה. הגדרנו שלושה יעדים ברורים כדי שתדעו בדיוק איך הכסף שלכם עוזר:</p>
             <div class="goals-grid">
                 <div class="goal-card">
-                    <i class="fas fa-utensils"></i>
-                    <h3>ביטחון תזונתי</h3>
-                    <p>ארוחות חמות למשפחות וקשישים.</p>
+                    <h3>יעד 1: אוויר לנשימה</h3>
+                    <div class="goal-amount">10,000 ₪ חד-פעמי + 3,000 ₪ חודשי</div>
+                    <p>היעד הזה יאפשר לנו לשחרר את עיקול החשבון, לשלם חובות דחופים ולדאוג שהצרכים הבסיסיים ביותר (אוכל,
+                        חשמל) יתקיימו בחודשים הקרובים. זהו חמצן חיוני.</p>
                 </div>
                 <div class="goal-card">
-                    <i class="fas fa-book-open"></i>
-                    <h3>חינוך ועתיד</h3>
-                    <p>עזרה בלימודים וציוד לילדים.</p>
+                    <h3>יעד 2: יציבות</h3>
+                    <div class="goal-amount">20,000 ₪ חד-פעמי + 5,000 ₪ חודשי</div>
+                    <p>הגעה ליעד הזה תאפשר כיסוי חובות משמעותי ושקט נפשי.</p>
                 </div>
                 <div class="goal-card">
-                    <i class="fas fa-heartbeat"></i>
-                    <h3>סיוע רפואי</h3>
-                    <p>תמיכה בתרופות וטיפולים דחופים.</p>
+                    <h3>יעד 3: שיקום מלא</h3>
+                    <div class="goal-amount">50,000 ₪ חד-פעמי + 8,000 ₪ חודשי</div>
+                    <p>זהו יעד השיקום המלא. הוא יאפשר לנו לסגור את החובות ולתת להם את הבסיס הנדרש לחזור ולעמוד על
+                        הרגליים בכוחות עצמם.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Merkaz Neshama -->
-    <section class="section soul-center">
+    <!-- Soul Center (Merkaz Neshama) -->
+    <section class="section soul-center-section">
         <div class="container">
-            <h2>מרכז נשמה</h2>
-            <p>הפרויקט מובל על ידי "מרכז נשמה", בית של חסד ונתינה שפועל ללא לאות למען הקהילה. אנחנו מאמינים שכל נשמה
-                ראויה לאור ושמחה.</p>
+            <h2>מי עומד מאחורינו? הכירו את "מרכז נשמה"</h2>
+            <p>הקמפיין הזה לא נולד בחלל ריק. הוא מנוהל ומפוקח על ידי מרכז נשמה, קהילה חסידית חמה ומוכרת, שעוסקת בלימוד
+                והפצת פנימיות התורה ובמעשי חסד וערבות הדדית.</p>
+            <ul class="features-list">
+                <li><strong>ליווי אישי:</strong> רבני המרכז מלווים את המשפחה באופן אישי ומכירים את הסיפור לעומק. הם
+                    ערבים לכך שהצורך אמיתי ודחוף.</li>
+                <li><strong>מעטפת מקצועית:</strong> המרכז מסייע למשפחה להתחבר לאנשי מקצוע, ייעוץ כלכלי וגישור מול
+                    הרשויות.</li>
+                <li><strong>אמינות ושקיפות:</strong> כל שקל שייתרם יועבר לחשבון ייעודי ומפוקח, שינוהל על ידי המרכז אך
+                    ורק לטובת שיקום המשפחה. האמון שלכם הוא הבסיס להצלחה.</li>
+            </ul>
         </div>
     </section>
 
     <!-- Team Leaders -->
-    <section class="section team">
+    <section id="team" class="section team-section">
         <div class="container">
-            <h2>הנבחרת המובילה</h2>
-            <div class="team-grid">
-                <!-- Add team members here if provided, otherwise generic placeholder or remove -->
-                <div class="team-member">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <h3>הרב יוסף כהן</h3>
-                    <p>מייסד ומנהל</p>
-                </div>
-                <div class="team-member">
-                    <div class="avatar"><i class="fas fa-user"></i></div>
-                    <h3>שרה לוי</h3>
-                    <p>רכזת מתנדבים</p>
-                </div>
+            <h2>רוצים לעשות יותר? הפכו לראשי צוותים!</h2>
+            <p>הכוח שלנו הוא באנשים. אם הסיפור נגע בלבכם ואתם רוצים לקחת חלק משמעותי יותר, אתם יכולים להפוך ל"ראשי
+                צוות". הרעיון פשוט: כל אחד מכם מגייס 5-10 חברים, בני משפחה או מכרים, שיצטרפו גם הם ליוזמת "שקל ביום".
+                כך, אתם לא רק תורמים בעצמכם, אלא בונים רשת תמיכה רחבה שמכפילה את הכוח שלנו ומראה למשפחה הזאת כמה אנשים
+                טובים עומדים מאחוריה.</p>
+            <div class="team-grid" id="team-grid">
+                <!-- Team members will be loaded here from JS -->
+                <p>טוען נתונים...</p>
             </div>
         </div>
     </section>
 
     <!-- Hasidic Inspiration -->
-    <section class="section inspiration">
+    <section class="section inspiration-section">
         <div class="container">
-            <h2>"גדולה צדקה שמקרבת את הגאולה"</h2>
-            <p>בתורת החסידות מוסבר כי הנתינה הקטנה והתמידית היא זו שפותחת את שערי השמיים. לא הכמות קובעת, אלא ההתמדה
-                והלב.</p>
-        </div>
-    </section>
-
-    <!-- Progress Bar -->
-    <section class="section progress-section">
-        <div class="container">
-            <h2>היעד שלנו: 1,000 שותפים</h2>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar" style="width: 0%">0%</div>
-            </div>
-            <p id="progressText">גייסנו 0 מתוך 1,000 שותפים</p>
+            <h2>"יותר ממה שבעל הבית עושה עם העני..."</h2>
+            <p>חז"ל לימדו אותנו עיקרון נצחי: "יותר ממה שבעל הבית עושה עם העני, העני עושה עם בעל הבית". כשאנחנו נותנים,
+                אנחנו אולי פותרים בעיה חומרית, אבל אנחנו מושכים לעצמנו שפע גשמי ורוחני גדול הרבה ואיתו הזכות, הסיפוק,
+                והחיבור לערך נעלה ביהדות – ערבות הדדית.</p>
+            <p>בתורת החסידות מוסבר שהצדקה הקבועה, כמו הוראת קבע, יוצרת "צינור" של שפע וברכה שלא נפסק. הנתינה הקטנה
+                והקבועה שלכם היא לא רק עזרה למשפחה, היא פותחת עבורכם שער של ברכה בחיים. אתם מצילים בית יהודי, ואיתו, אתם
+                מרוממים גם את עצמכם.</p>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section faq">
+    <section id="faq" class="section faq-section">
         <div class="container">
-            <h2>שאלות ותשובות</h2>
+            <h2>שקיפות מלאה: כל מה שרציתם לשאול</h2>
             <div class="accordion">
                 <div class="accordion-item">
-                    <button class="accordion-header">האם זה באמת רק שקל ליום?</button>
+                    <button class="accordion-header">למה המשפחה נשארת אנונימית?</button>
                     <div class="accordion-content">
-                        <p>כן! החיוב הוא חודשי, על סך 30 או 31 ש"ח, בהתאם למספר הימים בחודש.</p>
+                        <p>כדי לשמור על כבודה. המטרה היא לעזור להם לחזור למסלול החיים הרגיל, בלי שיצטרכו להתמודד עם
+                            המבטים והשאלות. כשהם יעמדו על הרגליים, הם יוכלו להמשיך בחייהם בגאווה.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <button class="accordion-header">האם התרומה מוכרת לצרכי מס?</button>
+                    <button class="accordion-header">לאן הכסף הולך?</button>
                     <div class="accordion-content">
-                        <p>בוודאי. העמותה מוכרת לפי סעיף 46 וקבלה נשלחת אוטומטית למייל.</p>
+                        <p>כל התרומות מועברות ישירות לחשבון בנק ייעודי שנפתח אך ורק עבור המשפחה, והוא מפוקח באופן מלא על
+                            ידי רבני "מרכז נשמה".</p>
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <button class="accordion-header">איך הכסף מגיע לנזקקים?</button>
+                    <button class="accordion-header">לכמה זמן הוראת הקבע?</button>
                     <div class="accordion-content">
-                        <p>100% מהתרומות עוברות ישירות לפעילות החסד, ללא משכורות או הוצאות מנהלה מיותרות.</p>
+                        <p>אנחנו מבקשים התחייבות ל-12 חודשים כדי להבטיח למשפחה יציבות, אך כמובן שניתן לבטל אותה בכל רגע.
+                        </p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">האם אפשר לתרום באופן אנונימי?</button>
+                    <div class="accordion-content">
+                        <p>בהחלט. מערכת התרומות מאפשרת לכם לבחור אם שמכם יוצג או לא.</p>
                     </div>
                 </div>
             </div>
@@ -158,32 +210,26 @@
     </section>
 
     <!-- CTA / Donate -->
-    <section id="donate" class="section donate-section">
+    <section id="donate" class="section cta-section">
         <div class="container">
-            <h2>הצטרפו עכשיו</h2>
-            <p>זה הזמן להיות חלק ממשהו גדול.</p>
-            <form id="donationForm" class="donation-form">
-                <div class="form-group">
-                    <label for="fullName">שם מלא</label>
-                    <input type="text" id="fullName" required placeholder="ישראל ישראלי">
-                </div>
-                <div class="form-group">
-                    <label for="email">אימייל</label>
-                    <input type="email" id="email" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="phone">טלפון</label>
-                    <input type="tel" id="phone" required placeholder="050-1234567">
-                </div>
-                <button type="submit" class="submit-btn">אני בפנים! (שקל ביום)</button>
-            </form>
-            <div id="formMessage"></div>
+            <h2>עכשיו תורכם. בואו נחזיר להם את האור.</h2>
+            <p>דמיינו את הרגע שבו האבא והאמא יקבלו את ההודעה שהחשבון שוחרר. דמיינו את ההקלה על פניהם כשיבינו שהם יכולים
+                לקחת את הילד לטיפול שהוא זקוק לו. דמיינו את התקווה חוזרת לעיניהם. אתם יכולים לגרום לזה לקרות.</p>
+            <p>הלילה, בזכותכם, הם יוכלו לישון קצת יותר טוב. בזכותכם, האור יתחיל לחזור הביתה. כל שקל חשוב. כל תרומה היא
+                עולם ומלואו.</p>
+            <a href="https://meshulam.co.il/purchase?b=e085c6f3-69f8-4060-9755-950794936306" target="_blank"
+                class="cta-button large">אני מצטרף עכשיו ל"שקל ביום" ומציל יחד אתכם בית בישראל!</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 שקל ביום | מרכז נשמה</p>
+            <p>&copy; 2025 מרכז נשמה. כל הזכויות שמורות.</p>
+            <div class="contact-info">
+                <p>ליצירת קשר:</p>
+                <p>אלרון קוריאט: <a href="tel:054320050">054-320050</a></p>
+                <p>עדי אבינון: <a href="tel:0546354155">054-6354155</a></p>
+            </div>
         </div>
     </footer>
 
