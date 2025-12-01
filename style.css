@@ -62,11 +62,11 @@ body {
     display: flex;
     gap: 30px;
     margin-bottom: 40px;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .hero-column {
-    flex: 1.5;
+    flex: 1;
     order: 1;
 }
 
@@ -87,7 +87,6 @@ body {
 
 .hero-media-placeholder {
     width: 100%;
-    max-height: 400px;
     height: auto;
     background: #e0e0e0;
     border-radius: 10px;
@@ -97,9 +96,8 @@ body {
 
 .hero-image {
     width: 100%;
-    height: 100%;
-    max-height: 400px;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     border-radius: 10px;
     display: block;
 }
@@ -117,10 +115,11 @@ body {
 }
 
 .story-section p {
-    font-size: 1.3em;
-    line-height: 1.8;
-    margin-bottom: 20px;
-    color: #2c3e50;
+    font-size: 1.45em;
+    line-height: 1.85;
+    margin-bottom: 25px;
+    color: #1a1a1a;
+    font-weight: 500;
 }
 
 /* Goals box */
@@ -317,34 +316,39 @@ body {
 
 .goal-box {
     background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     text-align: right;
     border-top: 5px solid #d32f2f;
 }
 
 .goal-box h3 {
-    font-size: 1.4em;
+    font-size: 1.5em;
     color: #2c3e50;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    line-height: 1.4;
 }
 
 .goal-content p {
-    margin-bottom: 20px;
-    line-height: 1.7;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-size: 1.05em;
 }
 
 .goal-content strong {
     color: #d32f2f;
+    font-size: 1.15em;
+    display: block;
+    margin-bottom: 10px;
 }
 
 /* Unified Info Section */
 .unified-info-section {
-    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+    background: linear-gradient(135deg, #1e88e5 0%, #1976d2 50%, #1565c0 100%);
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.2);
     margin-bottom: 40px;
 }
 
@@ -480,7 +484,8 @@ body {
     }
 
     .story-section p {
-        font-size: 1.1em;
+        font-size: 1.2em;
+        font-weight: 500;
     }
     
     .final-cta h1 {

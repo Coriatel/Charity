@@ -1,0 +1,3056 @@
+# Hebrew Web Design Rules for Cursor AI
+
+## Core Principles
+
+When creating Hebrew web content, ALWAYS:
+- Set `direction: rtl` and `lang="he"`
+- Use right-aligned text: `text-align: right`
+- Choose Hebrew-optimized fonts: Heebo, Rubik, Assistant
+- Use font-weight 500-600 for headings (not 700+, too heavy for Hebrew)
+- Maintain line-height 1.6-1.7 for body text
+- Ensure 4.5:1+ contrast ratio for accessibility
+
+## Typography Scale
+
+```css
+/* Always use this scale */
+:root {
+  --text-xs: 0.75rem;    /* 12px - tags, metadata */
+  --text-sm: 0.875rem;   /* 14px - secondary text */
+  --text-base: 1rem;     /* 16px - minimum body */
+  --text-lg: 1.125rem;   /* 18px - body (preferred) */
+  --text-xl: 1.25rem;    /* 20px - small headings */
+  --text-2xl: 1.5rem;    /* 24px - H3 */
+  --text-3xl: 2rem;      /* 32px - H2 */
+  --text-4xl: 2.5rem;    /* 40px - H1 */
+}
+
+/* Fluid typography with clamp() */
+h1 { font-size: clamp(1.5rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.25rem, 4vw, 2rem); }
+h3 { font-size: clamp(1.125rem, 3vw, 1.5rem); }
+body { font-size: clamp(1rem, 2vw, 1.125rem); }
+```
+
+## Spacing System
+
+Always use consistent spacing:
+```css
+:root {
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+  --space-3xl: 4rem;    /* 64px */
+}
+```
+
+## Standard Starter Template
+
+When creating new HTML files, use this base:
+
+```html
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --color-primary: #0066CC;
+      --color-text: #1A1A1A;
+      --color-text-light: #666666;
+      --color-bg: #FFFFFF;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+    }
+    
+    html {
+      direction: rtl;
+      font-size: 16px;
+    }
+    
+    body {
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      text-align: right;
+      background: var(--color-bg);
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    
+    h1 { font-size: clamp(1.875rem, 5vw, 3rem); margin-bottom: var(--space-lg); }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: var(--space-md); }
+    h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); margin-bottom: var(--space-md); }
+    
+    p { margin-bottom: var(--space-md); }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+    
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    
+    a:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Content here -->
+  </div>
+</body>
+</html>
+```
+
+## Card Component Pattern
+
+When creating cards, always use this structure:
+
+```html
+<article class="card">
+  <img class="card-image" src="..." alt="תיאור מפורט">
+  <div class="card-content">
+    <span class="card-category">קטגוריה</span>
+    <h3 class="card-title">כותרת</h3>
+    <p class="card-description">תיאור...</p>
+    <div class="card-footer">
+      <time datetime="2024-12-01">1 בדצמבר 2024</time>
+      <a href="#" class="card-cta">קרא עוד</a>
+    </div>
+  </div>
+</article>
+
+<style>
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-category {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+.card-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+  
+  /* Limit to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #E9ECEF;
+  font-size: 0.8125rem;
+  color: #999999;
+}
+
+.card-cta {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.card-cta:hover {
+  background: color-mix(in srgb, var(--color-primary) 90%, black);
+}
+</style>
+```
+
+## Grid Layout Pattern
+
+For card grids, use:
+
+```css
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+}
+```
+
+## Button Styles
+
+Standard button pattern:
+
+```css
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  min-height: 44px;
+  min-width: 44px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--color-primary) 90%, black);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: white;
+}
+```
+
+## Responsive Breakpoints
+
+```css
+/* Mobile: default (320px+) */
+
+/* Tablet */
+@media (min-width: 768px) {
+  /* Styles for tablet and up */
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  /* Styles for desktop and up */
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  /* Styles for large screens */
+}
+```
+
+## Accessibility Requirements
+
+ALWAYS include:
+1. `<html lang="he" dir="rtl">`
+2. Alt text for all images: `<img src="..." alt="תיאור מפורט">`
+3. Semantic HTML: `<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`
+4. Focus states: `outline: 3px solid` with `outline-offset: 2px`
+5. Minimum touch targets: 44x44px
+6. Color contrast: 4.5:1 minimum for text
+7. Form labels with `for` attribute
+8. ARIA labels where needed: `aria-label="..."`, `aria-describedby="..."`
+
+## Color Contrast Guide
+
+Good combinations (WCAG AA compliant):
+- `#1A1A1A` on `#FFFFFF` (16.1:1) ✅
+- `#333333` on `#FFFFFF` (12.6:1) ✅
+- `#666666` on `#FFFFFF` (5.7:1) ✅
+
+Bad combinations (avoid):
+- `#999999` on `#FFFFFF` (2.8:1) ❌
+- `#CCCCCC` on `#FFFFFF` (1.6:1) ❌
+
+## Common Mistakes to Avoid
+
+❌ DON'T:
+- Use LTR layout for Hebrew content
+- Use font-weight 700+ for Hebrew headings
+- Hardcode pixel values everywhere
+- Use line-height below 1.5 for body text
+- Create lines longer than 75 characters
+- Skip accessibility attributes
+- Use low contrast colors
+
+✅ DO:
+- Always set RTL direction
+- Use font-weight 500-600 for Hebrew
+- Use CSS variables from design system
+- Maintain 1.6-1.7 line-height
+- Keep lines 45-75 characters
+- Include proper semantic HTML
+- Ensure 4.5:1+ contrast
+
+## React/Next.js Specific
+
+For React components, wrap with RTL:
+
+```jsx
+// app/layout.jsx or _app.jsx
+export default function RootLayout({ children }) {
+  return (
+    <html lang="he" dir="rtl">
+      <body className="font-heebo">
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+Tailwind config for Hebrew:
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heebo: ['Heebo', 'system-ui', 'sans-serif'],
+        rubik: ['Rubik', 'system-ui', 'sans-serif'],
+      },
+    },
+  },
+}
+```
+
+## File Naming Convention
+
+For Hebrew projects:
+- Use English file names: `hero-section.jsx`, `content-card.jsx`
+- Use Hebrew for content: variable names, comments can be Hebrew
+- CSS class names: English (`.card`, `.hero-title`)
+- Content strings: Hebrew
+
+## Performance Tips
+
+```html
+<!-- Preload critical fonts -->
+<link rel="preload" href="/fonts/heebo.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Google Fonts optimized -->
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Rubik:wght@500;600&display=swap" rel="stylesheet">
+```
+
+## Testing Checklist
+
+Before considering any Hebrew web page complete:
+- [ ] RTL layout works correctly
+- [ ] Text aligns to the right
+- [ ] Font weights look good (not too heavy)
+- [ ] Line height is comfortable (1.6+)
+- [ ] Responsive on mobile, tablet, desktop
+- [ ] Color contrast meets WCAG AA
+- [ ] All images have alt text
+- [ ] Focus states are visible
+- [ ] Interactive elements are 44x44px minimum
+- [ ] Semantic HTML is used
+- [ ] No hardcoded values (using CSS variables)
+
+## When in Doubt
+
+Default to:
+- Font: Heebo 18px, line-height 1.6
+- Headings: Rubik, weight 600
+- Spacing: use the spacing scale
+- Colors: ensure 4.5:1+ contrast
+- Layout: mobile-first, RTL
+- Components: semantic HTML with proper ARIA
+
+---
+
+# Advanced Web Development Patterns
+
+## Landing Page Structure
+
+Best practice landing page structure:
+
+```html
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="תיאור קצר וממוקד של הדף (150-160 תווים)">
+  <meta name="keywords" content="מילות מפתח, רלוונטיות">
+  
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="כותרת הדף">
+  <meta property="og:description" content="תיאור">
+  <meta property="og:image" content="https://example.com/image.jpg">
+  <meta property="og:type" content="website">
+  
+  <title>כותרת SEO אופטימלית | שם האתר</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Rubik:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="/" class="logo">לוגו</a>
+      <ul class="nav-menu">
+        <li><a href="#features">תכונות</a></li>
+        <li><a href="#pricing">מחירים</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+      <a href="#cta" class="btn-primary">התחל עכשיו</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>כותרת ראשית חזקה ומשכנעת</h1>
+      <p class="hero-subtitle">תת-כותרת שמסבירה את הערך המוצע</p>
+      <div class="hero-cta">
+        <a href="#" class="btn-primary btn-lg">פעולה ראשית</a>
+        <a href="#" class="btn-secondary btn-lg">למד עוד</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2>התכונות שלנו</h2>
+      <div class="features-grid">
+        <!-- Feature cards here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof Section -->
+  <section class="social-proof">
+    <div class="container">
+      <h2>הם כבר סומכים עלינו</h2>
+      <div class="testimonials">
+        <!-- Testimonials here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="cta" class="cta">
+    <div class="container">
+      <h2>מוכנים להתחיל?</h2>
+      <a href="#" class="btn-primary btn-lg">הצטרף עכשיו</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>על אודות</h3>
+          <ul>
+            <li><a href="#">אודותינו</a></li>
+            <li><a href="#">צור קשר</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>עקוב אחרינו</h3>
+          <div class="social-links">
+            <!-- Social icons -->
+          </div>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2024 כל הזכויות שמורות</p>
+    </div>
+  </footer>
+</body>
+</html>
+```
+
+## Navigation Patterns
+
+### Sticky Header
+```css
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-menu a {
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+  color: var(--color-primary);
+}
+```
+
+### Mobile Menu (Hamburger)
+```html
+<button class="mobile-menu-toggle" aria-label="פתח תפריט" aria-expanded="false">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<style>
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.mobile-menu-toggle span {
+  width: 24px;
+  height: 3px;
+  background: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    left: 0;
+    background: white;
+    flex-direction: column;
+    padding: 2rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+</style>
+
+<script>
+const toggle = document.querySelector('.mobile-menu-toggle');
+const menu = document.querySelector('.nav-menu');
+
+toggle.addEventListener('click', () => {
+  const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+  toggle.setAttribute('aria-expanded', !isExpanded);
+  menu.classList.toggle('active');
+});
+</script>
+```
+
+## Hero Section Patterns
+
+### Gradient Background Hero
+```css
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+```
+
+### Split Hero (Image + Content)
+```html
+<section class="hero-split">
+  <div class="hero-content">
+    <h1>כותרת מרשימה</h1>
+    <p>תיאור המוצר או השירות</p>
+    <div class="hero-cta">
+      <a href="#" class="btn-primary">התחל עכשיו</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="hero.jpg" alt="תמונת גיבור">
+  </div>
+</section>
+
+<style>
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 80vh;
+  padding: 4rem 2rem;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-image {
+    order: -1;
+  }
+}
+</style>
+```
+
+## Form Patterns
+
+### Contact Form with Validation
+```html
+<form class="contact-form" id="contactForm">
+  <div class="form-group">
+    <label for="name">שם מלא *</label>
+    <input 
+      type="text" 
+      id="name" 
+      name="name" 
+      required
+      minlength="2"
+      aria-required="true"
+      aria-describedby="name-hint"
+    >
+    <span class="form-hint" id="name-hint">לפחות 2 תווים</span>
+    <span class="form-error" role="alert"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="email">אימייל *</label>
+    <input 
+      type="email" 
+      id="email" 
+      name="email" 
+      required
+      aria-required="true"
+      aria-describedby="email-hint"
+    >
+    <span class="form-hint" id="email-hint">נשלח אישור למייל זה</span>
+    <span class="form-error" role="alert"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">טלפון</label>
+    <input 
+      type="tel" 
+      id="phone" 
+      name="phone"
+      pattern="[0-9]{9,10}"
+      aria-describedby="phone-hint"
+    >
+    <span class="form-hint" id="phone-hint">05X-XXXXXXX</span>
+    <span class="form-error" role="alert"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="message">הודעה *</label>
+    <textarea 
+      id="message" 
+      name="message" 
+      rows="5"
+      required
+      minlength="10"
+      aria-required="true"
+    ></textarea>
+    <span class="form-error" role="alert"></span>
+  </div>
+
+  <button type="submit" class="btn-primary">שלח הודעה</button>
+</form>
+
+<style>
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #E9ECEF;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  direction: rtl;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+  border-color: #DC3545;
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-top: 0.25rem;
+}
+
+.form-error {
+  display: none;
+  font-size: 0.875rem;
+  color: #DC3545;
+  margin-top: 0.25rem;
+}
+
+.form-group input:invalid:not(:placeholder-shown) + .form-hint + .form-error {
+  display: block;
+}
+</style>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+  
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    if (response.ok) {
+      alert('ההודעה נשלחה בהצלחה!');
+      e.target.reset();
+    } else {
+      alert('שגיאה בשליחת ההודעה. נסה שוב.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('שגיאה בשליחת ההודעה.');
+  }
+});
+</script>
+```
+
+## Feature Section Patterns
+
+### Icon + Title + Description
+```html
+<section class="features">
+  <div class="container">
+    <h2 class="section-title">למה לבחור בנו?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg><!-- icon --></svg>
+        </div>
+        <h3>מהירות</h3>
+        <p>ביצועים מהירים וזמינות גבוהה</p>
+      </div>
+      <!-- More feature cards -->
+    </div>
+  </div>
+</section>
+
+<style>
+.features {
+  padding: 6rem 0;
+  background: var(--color-bg-secondary);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+
+.feature-card h3 {
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: var(--color-text-light);
+  margin: 0;
+}
+</style>
+```
+
+## Testimonials/Social Proof
+
+```html
+<section class="testimonials">
+  <div class="container">
+    <h2>מה אומרים הלקוחות שלנו</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-rating">
+          ⭐⭐⭐⭐⭐
+        </div>
+        <p class="testimonial-text">
+          "שירות מעולה! ממליץ בחום לכל מי שמחפש פתרון איכותי ומקצועי."
+        </p>
+        <div class="testimonial-author">
+          <img src="avatar.jpg" alt="תמונת פרופיל">
+          <div>
+            <strong>יוסי כהן</strong>
+            <span>מנכ"ל, חברת ABC</span>
+          </div>
+        </div>
+      </div>
+      <!-- More testimonials -->
+    </div>
+  </div>
+</section>
+
+<style>
+.testimonials {
+  padding: 6rem 0;
+  background: white;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  padding: 2rem;
+  background: var(--color-bg-secondary);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-rating {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.testimonial-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimonial-author img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-author div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.testimonial-author strong {
+  font-weight: 600;
+}
+
+.testimonial-author span {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+</style>
+```
+
+## Pricing Tables
+
+```html
+<section class="pricing">
+  <div class="container">
+    <h2>בחר את התוכנית שמתאימה לך</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Basic</h3>
+        <div class="price">
+          <span class="amount">₪99</span>
+          <span class="period">/חודש</span>
+        </div>
+        <ul class="features-list">
+          <li>✓ תכונה 1</li>
+          <li>✓ תכונה 2</li>
+          <li>✓ תכונה 3</li>
+        </ul>
+        <a href="#" class="btn-secondary">התחל עכשיו</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="badge">מומלץ</div>
+        <h3>Pro</h3>
+        <div class="price">
+          <span class="amount">₪199</span>
+          <span class="period">/חודש</span>
+        </div>
+        <ul class="features-list">
+          <li>✓ כל תכונות Basic</li>
+          <li>✓ תכונה מתקדמת 1</li>
+          <li>✓ תכונה מתקדמת 2</li>
+          <li>✓ תמיכה מועדפת</li>
+        </ul>
+        <a href="#" class="btn-primary">התחל עכשיו</a>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">
+          <span class="amount">מותאם אישית</span>
+        </div>
+        <ul class="features-list">
+          <li>✓ כל תכונות Pro</li>
+          <li>✓ פתרון מותאם</li>
+          <li>✓ תמיכה 24/7</li>
+        </ul>
+        <a href="#" class="btn-secondary">צור קשר</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.pricing {
+  padding: 6rem 0;
+  background: var(--color-bg-secondary);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pricing-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-card.featured {
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  right: 50%;
+  transform: translateX(50%);
+  background: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.pricing-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  margin-bottom: 2rem;
+}
+
+.price .amount {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.price .period {
+  font-size: 1rem;
+  color: var(--color-text-light);
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: right;
+}
+
+.features-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #E9ECEF;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.pricing-card .btn-primary,
+.pricing-card .btn-secondary {
+  width: 100%;
+}
+</style>
+```
+
+## FAQ Section
+
+```html
+<section class="faq">
+  <div class="container">
+    <h2>שאלות נפוצות</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>מה זמן האספקה?</span>
+          <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </button>
+        <div class="faq-answer" hidden>
+          <p>זמן האספקה הממוצע הוא 3-5 ימי עסקים.</p>
+        </div>
+      </div>
+      <!-- More FAQ items -->
+    </div>
+  </div>
+</section>
+
+<style>
+.faq {
+  padding: 6rem 0;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 3rem auto 0;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  border: 2px solid #E9ECEF;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem;
+  background: white;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: right;
+  transition: background 0.2s;
+}
+
+.faq-question:hover {
+  background: var(--color-bg-secondary);
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.faq-question[aria-expanded="true"] .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-answer:not([hidden]) {
+  padding: 0 1.5rem 1.5rem;
+  max-height: 500px;
+}
+
+.faq-answer p {
+  color: var(--color-text-light);
+  line-height: 1.7;
+  margin: 0;
+}
+</style>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', () => {
+    const answer = button.nextElementSibling;
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    
+    button.setAttribute('aria-expanded', !isExpanded);
+    answer.hidden = isExpanded;
+  });
+});
+</script>
+```
+
+## Animation & Scroll Effects
+
+### Fade In on Scroll
+```html
+<div class="fade-in-section">
+  <h2>תוכן שמופיע בגלילה</h2>
+</div>
+
+<style>
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+document.querySelectorAll('.fade-in-section').forEach(el => {
+  observer.observe(el);
+});
+</script>
+```
+
+### Smooth Scroll
+```css
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+```
+
+## Performance Optimization
+
+### Lazy Loading Images
+```html
+<img 
+  src="placeholder.jpg" 
+  data-src="actual-image.jpg" 
+  alt="תיאור"
+  loading="lazy"
+  class="lazy-image"
+>
+
+<script>
+if ('loading' in HTMLImageElement.prototype) {
+  // Browser supports native lazy loading
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach(img => {
+    img.src = img.dataset.src;
+  });
+} else {
+  // Fallback for older browsers
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        imageObserver.unobserve(img);
+      }
+    });
+  });
+  
+  document.querySelectorAll('.lazy-image').forEach(img => {
+    imageObserver.observe(img);
+  });
+}
+</script>
+```
+
+### CSS Optimization
+```css
+/* Use containment for better performance */
+.card {
+  contain: layout style paint;
+}
+
+/* Use will-change sparingly */
+.animated-element {
+  will-change: transform;
+}
+
+.animated-element.done {
+  will-change: auto;
+}
+
+/* Optimize animations */
+.smooth-animation {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+```
+
+## SEO Best Practices
+
+### Meta Tags Template
+```html
+<head>
+  <!-- Essential Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="תיאור ממוקד ואינפורמטיבי (150-160 תווים)">
+  <meta name="keywords" content="מילת מפתח 1, מילת מפתח 2, מילת מפתח 3">
+  <meta name="author" content="שם המחבר או החברה">
+  
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="כותרת הדף">
+  <meta property="og:description" content="תיאור קצר">
+  <meta property="og:image" content="https://example.com/image.jpg">
+  <meta property="og:url" content="https://example.com">
+  <meta property="og:site_name" content="שם האתר">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="כותרת הדף">
+  <meta name="twitter:description" content="תיאור קצר">
+  <meta name="twitter:image" content="https://example.com/image.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://example.com/page">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "שם החברה",
+    "url": "https://example.com",
+    "logo": "https://example.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+972-50-1234567",
+      "contactType": "Customer Service"
+    }
+  }
+  </script>
+</head>
+```
+
+## Security Headers
+
+Add these to your server configuration or use meta tags:
+
+```html
+<!-- Content Security Policy -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+
+<!-- Prevent clickjacking -->
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+<!-- XSS Protection -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+```
+
+## Cookie Consent Banner
+
+```html
+<div id="cookieConsent" class="cookie-consent" hidden>
+  <div class="cookie-content">
+    <p>אנו משתמשים בעוגיות כדי לשפר את חוויית המשתמש שלך.</p>
+    <div class="cookie-actions">
+      <button id="acceptCookies" class="btn-primary">אני מסכים</button>
+      <button id="declineCookies" class="btn-secondary">לא, תודה</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  z-index: 9999;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.cookie-consent:not([hidden]) {
+  transform: translateY(0);
+}
+
+.cookie-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .cookie-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cookie-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .cookie-actions button {
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+const consent = document.getElementById('cookieConsent');
+const accept = document.getElementById('acceptCookies');
+const decline = document.getElementById('declineCookies');
+
+// Check if user already made a choice
+if (!localStorage.getItem('cookieConsent')) {
+  consent.hidden = false;
+}
+
+accept.addEventListener('click', () => {
+  localStorage.setItem('cookieConsent', 'accepted');
+  consent.hidden = true;
+});
+
+decline.addEventListener('click', () => {
+  localStorage.setItem('cookieConsent', 'declined');
+  consent.hidden = true;
+});
+</script>
+```
+
+## Loading States
+
+```html
+<button class="btn-primary" id="submitBtn">
+  <span class="btn-text">שלח</span>
+  <span class="btn-loader" hidden>
+    <svg class="spinner" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+    </svg>
+  </span>
+</button>
+
+<style>
+.btn-primary {
+  position: relative;
+}
+
+.btn-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  animation: rotate 1s linear infinite;
+}
+
+.spinner circle {
+  stroke-dasharray: 125;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.btn-primary.loading .btn-text {
+  visibility: hidden;
+}
+
+.btn-primary.loading .btn-loader {
+  display: block;
+}
+</style>
+
+<script>
+document.getElementById('submitBtn').addEventListener('click', async function() {
+  this.classList.add('loading');
+  this.disabled = true;
+  
+  try {
+    // Your async operation
+    await someAsyncOperation();
+  } finally {
+    this.classList.remove('loading');
+    this.disabled = false;
+  }
+});
+</script>
+```
+
+## Error States
+
+```html
+<div class="error-state">
+  <svg class="error-icon" width="64" height="64" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+  </svg>
+  <h3>אופס! משהו השתבש</h3>
+  <p>לא הצלחנו לטעון את התוכן. אנא נסה שוב.</p>
+  <button class="btn-primary" onclick="location.reload()">נסה שוב</button>
+</div>
+
+<style>
+.error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.error-icon {
+  color: #DC3545;
+  margin-bottom: 1.5rem;
+}
+
+.error-state h3 {
+  margin-bottom: 1rem;
+}
+
+.error-state p {
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+}
+</style>
+```
+
+---
+
+## Quick Reference: Common Patterns
+
+### Centering Content
+```css
+/* Flexbox method */
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Grid method */
+.center-grid {
+  display: grid;
+  place-items: center;
+}
+
+/* Absolute positioning */
+.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+
+### Aspect Ratio Boxes
+```css
+.aspect-ratio-16-9 {
+  aspect-ratio: 16 / 9;
+  /* Fallback for older browsers */
+  position: relative;
+  padding-bottom: 56.25%; /* 9/16 * 100 */
+}
+
+.aspect-ratio-16-9 > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
+
+### Truncate Text
+```css
+/* Single line */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Multiple lines */
+.truncate-3-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+```
+
+### Gradient Text
+```css
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+```
+
+---
+
+# Testing & Quality Assurance
+
+## Testing Strategy
+
+### Unit Testing (Jest)
+
+```javascript
+// utils/validation.test.js
+import { validateEmail, validatePhone } from './validation';
+
+describe('Email Validation', () => {
+  test('should accept valid email', () => {
+    expect(validateEmail('user@example.com')).toBe(true);
+  });
+
+  test('should reject invalid email', () => {
+    expect(validateEmail('invalid-email')).toBe(false);
+    expect(validateEmail('user@')).toBe(false);
+    expect(validateEmail('@example.com')).toBe(false);
+  });
+
+  test('should handle Hebrew emails', () => {
+    expect(validateEmail('משתמש@example.com')).toBe(false);
+  });
+});
+
+describe('Phone Validation', () => {
+  test('should accept Israeli phone numbers', () => {
+    expect(validatePhone('0501234567')).toBe(true);
+    expect(validatePhone('050-123-4567')).toBe(true);
+    expect(validatePhone('+972501234567')).toBe(true);
+  });
+
+  test('should reject invalid phone numbers', () => {
+    expect(validatePhone('123')).toBe(false);
+    expect(validatePhone('abc')).toBe(false);
+  });
+});
+```
+
+```javascript
+// utils/validation.js
+export function validateEmail(email) {
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return regex.test(email);
+}
+
+export function validatePhone(phone) {
+  // Remove spaces and dashes
+  const cleaned = phone.replace(/[\s-]/g, '');
+  
+  // Israeli phone patterns
+  const patterns = [
+    /^05\d{8}$/,           // 05X-XXXXXXXX
+    /^\+97205\d{8}$/,      // +97205X-XXXXXXXX
+    /^97205\d{8}$/         // 97205X-XXXXXXXX
+  ];
+  
+  return patterns.some(pattern => pattern.test(cleaned));
+}
+```
+
+### Component Testing (React Testing Library)
+
+```javascript
+// components/ContactForm.test.jsx
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import ContactForm from './ContactForm';
+
+describe('ContactForm', () => {
+  test('renders all form fields', () => {
+    render(<ContactForm />);
+    
+    expect(screen.getByLabelText(/שם מלא/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/אימייל/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/טלפון/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/הודעה/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /שלח/i })).toBeInTheDocument();
+  });
+
+  test('shows validation errors on empty submit', async () => {
+    render(<ContactForm />);
+    
+    const submitButton = screen.getByRole('button', { name: /שלח/i });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/שדה חובה/i)).toBeInTheDocument();
+    });
+  });
+
+  test('submits form with valid data', async () => {
+    const mockSubmit = jest.fn();
+    render(<ContactForm onSubmit={mockSubmit} />);
+
+    await userEvent.type(screen.getByLabelText(/שם מלא/i), 'יוסי כהן');
+    await userEvent.type(screen.getByLabelText(/אימייל/i), 'yossi@example.com');
+    await userEvent.type(screen.getByLabelText(/טלפון/i), '0501234567');
+    await userEvent.type(screen.getByLabelText(/הודעה/i), 'הודעת בדיקה');
+
+    fireEvent.click(screen.getByRole('button', { name: /שלח/i }));
+
+    await waitFor(() => {
+      expect(mockSubmit).toHaveBeenCalledWith({
+        name: 'יוסי כהן',
+        email: 'yossi@example.com',
+        phone: '0501234567',
+        message: 'הודעת בדיקה'
+      });
+    });
+  });
+
+  test('shows loading state during submission', async () => {
+    const mockSubmit = jest.fn(() => new Promise(resolve => setTimeout(resolve, 100)));
+    render(<ContactForm onSubmit={mockSubmit} />);
+
+    // Fill form
+    await userEvent.type(screen.getByLabelText(/שם מלא/i), 'יוסי כהן');
+    await userEvent.type(screen.getByLabelText(/אימייל/i), 'yossi@example.com');
+    await userEvent.type(screen.getByLabelText(/הודעה/i), 'הודעת בדיקה');
+
+    const submitButton = screen.getByRole('button', { name: /שלח/i });
+    fireEvent.click(submitButton);
+
+    expect(submitButton).toBeDisabled();
+    expect(screen.getByRole('button', { name: /שולח/i })).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(submitButton).not.toBeDisabled();
+    });
+  });
+});
+```
+
+### E2E Testing (Playwright/Cypress)
+
+```javascript
+// e2e/landing-page.spec.js (Playwright)
+import { test, expect } from '@playwright/test';
+
+test.describe('Landing Page', () => {
+  test('should load homepage correctly', async ({ page }) => {
+    await page.goto('/');
+    
+    // Check hero section
+    await expect(page.locator('h1')).toContainText('כותרת ראשית');
+    
+    // Check CTA button
+    const ctaButton = page.locator('.hero-cta .btn-primary');
+    await expect(ctaButton).toBeVisible();
+  });
+
+  test('should navigate using menu', async ({ page }) => {
+    await page.goto('/');
+    
+    // Click on features link
+    await page.click('nav a[href="#features"]');
+    
+    // Check if scrolled to features section
+    await expect(page.locator('#features')).toBeInViewport();
+  });
+
+  test('should open mobile menu on small screens', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    // Click hamburger menu
+    await page.click('.mobile-menu-toggle');
+    
+    // Check if menu is visible
+    await expect(page.locator('.nav-menu')).toHaveClass(/active/);
+  });
+
+  test('should submit contact form', async ({ page }) => {
+    await page.goto('/');
+    
+    // Navigate to contact form
+    await page.click('a[href="#contact"]');
+    
+    // Fill form
+    await page.fill('#name', 'יוסי כהן');
+    await page.fill('#email', 'yossi@example.com');
+    await page.fill('#phone', '0501234567');
+    await page.fill('#message', 'הודעת בדיקה');
+    
+    // Submit
+    await page.click('button[type="submit"]');
+    
+    // Check success message
+    await expect(page.locator('.success-message')).toBeVisible();
+  });
+
+  test('should be accessible', async ({ page }) => {
+    await page.goto('/');
+    
+    // Run accessibility checks
+    const accessibilityScanResults = await page.evaluate(() => {
+      // Simple accessibility checks
+      const results = {
+        hasLangAttribute: document.documentElement.hasAttribute('lang'),
+        hasMainLandmark: !!document.querySelector('main'),
+        allImagesHaveAlt: Array.from(document.querySelectorAll('img')).every(img => img.alt),
+        formsHaveLabels: Array.from(document.querySelectorAll('input, textarea')).every(input => {
+          const id = input.id;
+          return id && document.querySelector(`label[for="${id}"]`);
+        })
+      };
+      return results;
+    });
+    
+    expect(accessibilityScanResults.hasLangAttribute).toBe(true);
+    expect(accessibilityScanResults.hasMainLandmark).toBe(true);
+    expect(accessibilityScanResults.allImagesHaveAlt).toBe(true);
+  });
+});
+```
+
+### Visual Regression Testing
+
+```javascript
+// e2e/visual-regression.spec.js
+import { test } from '@playwright/test';
+
+test.describe('Visual Regression', () => {
+  test('homepage should match baseline', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+    
+    // Take full page screenshot
+    await expect(page).toHaveScreenshot('homepage-full.png', {
+      fullPage: true,
+      maxDiffPixels: 100
+    });
+  });
+
+  test('hero section should match baseline', async ({ page }) => {
+    await page.goto('/');
+    
+    const hero = page.locator('.hero');
+    await expect(hero).toHaveScreenshot('hero-section.png');
+  });
+
+  test('mobile menu should match baseline', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    await page.click('.mobile-menu-toggle');
+    await expect(page.locator('.nav-menu')).toHaveScreenshot('mobile-menu.png');
+  });
+});
+```
+
+## Quality Checks
+
+### Lighthouse CI Configuration
+
+```javascript
+// lighthouserc.js
+module.exports = {
+  ci: {
+    collect: {
+      url: ['http://localhost:3000/'],
+      numberOfRuns: 3,
+      settings: {
+        preset: 'desktop',
+        onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
+      },
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['error', { minScore: 0.9 }],
+        'categories:accessibility': ['error', { minScore: 0.95 }],
+        'categories:best-practices': ['error', { minScore: 0.9 }],
+        'categories:seo': ['error', { minScore: 0.9 }],
+        
+        // Specific metrics
+        'first-contentful-paint': ['error', { maxNumericValue: 2000 }],
+        'largest-contentful-paint': ['error', { maxNumericValue: 3000 }],
+        'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
+        'total-blocking-time': ['error', { maxNumericValue: 300 }],
+      },
+    },
+    upload: {
+      target: 'temporary-public-storage',
+    },
+  },
+};
+```
+
+### ESLint Configuration for Hebrew Projects
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended',
+    'prettier'
+  ],
+  plugins: ['react', 'jsx-a11y'],
+  rules: {
+    // RTL specific
+    'jsx-a11y/html-has-lang': 'error',
+    'jsx-a11y/lang': 'error',
+    
+    // Accessibility
+    'jsx-a11y/alt-text': 'error',
+    'jsx-a11y/aria-props': 'error',
+    'jsx-a11y/aria-proptypes': 'error',
+    'jsx-a11y/aria-unsupported-elements': 'error',
+    'jsx-a11y/label-has-associated-control': 'error',
+    'jsx-a11y/no-autofocus': 'warn',
+    
+    // Best practices
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'react/prop-types': 'warn',
+    'react/jsx-no-target-blank': 'error',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+};
+```
+
+### Prettier Configuration
+
+```javascript
+// .prettierrc
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "avoid",
+  "endOfLine": "lf"
+}
+```
+
+### Husky Pre-commit Hooks
+
+```json
+// package.json
+{
+  "scripts": {
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "lighthouse": "lhci autorun"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  }
+}
+```
+
+## Accessibility Testing
+
+### Automated A11y Testing
+
+```javascript
+// tests/accessibility.test.js
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test.describe('Accessibility', () => {
+  test('should not have any automatically detectable accessibility issues', async ({ page }) => {
+    await page.goto('/');
+    
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze();
+    
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
+
+  test('should have proper heading hierarchy', async ({ page }) => {
+    await page.goto('/');
+    
+    const headings = await page.evaluate(() => {
+      const h1 = document.querySelectorAll('h1').length;
+      const h2 = document.querySelectorAll('h2').length;
+      const h3 = document.querySelectorAll('h3').length;
+      return { h1, h2, h3 };
+    });
+    
+    expect(headings.h1).toBe(1); // Only one H1
+    expect(headings.h2).toBeGreaterThan(0); // At least one H2
+  });
+
+  test('should be keyboard navigable', async ({ page }) => {
+    await page.goto('/');
+    
+    // Tab through interactive elements
+    await page.keyboard.press('Tab');
+    let activeElement = await page.evaluate(() => document.activeElement.tagName);
+    expect(['A', 'BUTTON', 'INPUT']).toContain(activeElement);
+    
+    // Check focus is visible
+    const focusOutline = await page.evaluate(() => {
+      const elem = document.activeElement;
+      const styles = window.getComputedStyle(elem);
+      return styles.outline !== 'none' || styles.boxShadow !== 'none';
+    });
+    expect(focusOutline).toBe(true);
+  });
+});
+```
+
+### Manual A11y Checklist
+
+```markdown
+# Accessibility Testing Checklist
+
+## Visual
+- [ ] Color contrast meets WCAG AA (4.5:1 for text, 3:1 for large text)
+- [ ] Focus indicators are clearly visible
+- [ ] Text can be resized to 200% without loss of functionality
+- [ ] Content is readable and functional at 320px viewport width
+
+## Keyboard Navigation
+- [ ] All interactive elements are keyboard accessible
+- [ ] Tab order is logical and intuitive
+- [ ] No keyboard traps exist
+- [ ] Shortcuts don't conflict with screen readers
+
+## Screen Reader
+- [ ] Page has proper lang attribute (lang="he")
+- [ ] All images have meaningful alt text
+- [ ] Form inputs have associated labels
+- [ ] ARIA labels are used where appropriate
+- [ ] Landmark regions are properly defined
+- [ ] Dynamic content changes are announced
+
+## Structure
+- [ ] Only one H1 per page
+- [ ] Heading hierarchy is logical (H1 > H2 > H3)
+- [ ] Lists use proper markup (ul, ol)
+- [ ] Tables have proper headers
+
+## Forms
+- [ ] All inputs have labels
+- [ ] Required fields are marked
+- [ ] Error messages are clear and helpful
+- [ ] Success messages are announced
+- [ ] Field validation happens appropriately
+
+## Media
+- [ ] Videos have captions
+- [ ] Audio has transcripts
+- [ ] Autoplay is disabled or can be paused
+```
+
+## Performance Testing
+
+### Web Vitals Monitoring
+
+```javascript
+// utils/web-vitals.js
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+
+function sendToAnalytics(metric) {
+  const body = JSON.stringify({
+    name: metric.name,
+    value: metric.value,
+    id: metric.id,
+    label: metric.label,
+  });
+
+  // Send to analytics endpoint
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon('/api/analytics', body);
+  } else {
+    fetch('/api/analytics', { body, method: 'POST', keepalive: true });
+  }
+}
+
+export function reportWebVitals() {
+  getCLS(sendToAnalytics);
+  getFID(sendToAnalytics);
+  getFCP(sendToAnalytics);
+  getLCP(sendToAnalytics);
+  getTTFB(sendToAnalytics);
+}
+
+// Use in your app
+// reportWebVitals();
+```
+
+### Performance Budget
+
+```javascript
+// performance-budget.json
+{
+  "budgets": [
+    {
+      "resourceSizes": [
+        {
+          "resourceType": "document",
+          "budget": 18
+        },
+        {
+          "resourceType": "stylesheet",
+          "budget": 50
+        },
+        {
+          "resourceType": "script",
+          "budget": 200
+        },
+        {
+          "resourceType": "image",
+          "budget": 500
+        },
+        {
+          "resourceType": "font",
+          "budget": 100
+        },
+        {
+          "resourceType": "total",
+          "budget": 800
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+# Project Structure
+
+## Recommended File Structure
+
+### Small Project (Static Site)
+```
+my-website/
+├── index.html
+├── css/
+│   ├── style.css
+│   ├── normalize.css
+│   └── rtl.css
+├── js/
+│   ├── main.js
+│   ├── validation.js
+│   └── utils.js
+├── images/
+│   ├── logo.svg
+│   ├── hero.jpg
+│   └── icons/
+├── fonts/
+│   ├── Heebo/
+│   └── Rubik/
+└── assets/
+    ├── favicon.ico
+    └── manifest.json
+```
+
+### Medium Project (Multi-page Site)
+```
+my-website/
+├── index.html
+├── about.html
+├── contact.html
+├── 404.html
+├── assets/
+│   ├── css/
+│   │   ├── main.css
+│   │   ├── components/
+│   │   │   ├── header.css
+│   │   │   ├── footer.css
+│   │   │   ├── card.css
+│   │   │   └── button.css
+│   │   └── pages/
+│   │       ├── home.css
+│   │       ├── about.css
+│   │       └── contact.css
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── components/
+│   │   │   ├── navigation.js
+│   │   │   ├── form.js
+│   │   │   └── modal.js
+│   │   └── utils/
+│   │       ├── validation.js
+│   │       ├── api.js
+│   │       └── helpers.js
+│   ├── images/
+│   ├── fonts/
+│   └── icons/
+├── .gitignore
+├── README.md
+└── package.json
+```
+
+### Large Project (React/Next.js)
+```
+my-app/
+├── public/
+│   ├── images/
+│   ├── fonts/
+│   └── favicon.ico
+├── src/
+│   ├── app/                    # Next.js 13+ App Router
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   └── api/
+│   │       └── contact/
+│   │           └── route.ts
+│   ├── components/
+│   │   ├── ui/                 # Reusable UI components
+│   │   │   ├── Button/
+│   │   │   │   ├── Button.tsx
+│   │   │   │   ├── Button.test.tsx
+│   │   │   │   └── Button.module.css
+│   │   │   ├── Card/
+│   │   │   └── Input/
+│   │   ├── layout/             # Layout components
+│   │   │   ├── Header/
+│   │   │   ├── Footer/
+│   │   │   └── Navigation/
+│   │   └── sections/           # Page sections
+│   │       ├── Hero/
+│   │       ├── Features/
+│   │       └── Testimonials/
+│   ├── lib/                    # Utilities
+│   │   ├── api.ts
+│   │   ├── validation.ts
+│   │   └── constants.ts
+│   ├── hooks/                  # Custom hooks
+│   │   ├── useForm.ts
+│   │   └── useMediaQuery.ts
+│   ├── types/                  # TypeScript types
+│   │   ├── index.ts
+│   │   └── api.ts
+│   ├── styles/
+│   │   ├── globals.css
+│   │   └── variables.css
+│   └── tests/
+│       ├── unit/
+│       ├── integration/
+│       └── e2e/
+├── .env.local
+├── .env.example
+├── .eslintrc.js
+├── .prettierrc
+├── jest.config.js
+├── playwright.config.ts
+├── tsconfig.json
+├── next.config.js
+├── package.json
+└── README.md
+```
+
+## Configuration Files
+
+### .gitignore
+```
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production
+build/
+dist/
+out/
+.next/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Misc
+.cache/
+.temp/
+```
+
+### .env.example
+```
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+API_SECRET_KEY=your-secret-key-here
+
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+
+# Email Service
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=your-email@example.com
+SMTP_PASS=your-password
+
+# Analytics
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Feature Flags
+NEXT_PUBLIC_ENABLE_BETA_FEATURES=false
+```
+
+---
+
+# Server-Side Development
+
+## Node.js + Express API
+
+### Basic Server Setup
+
+```javascript
+// server.js
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(helmet()); // Security headers
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+  credentials: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'יותר מדי בקשות מכתובת IP זו, נסה שוב מאוחר יותר'
+});
+app.use('/api/', limiter);
+
+// Request logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
+
+// Routes
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Contact form endpoint
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+
+    // Validation
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        error: 'שדות חובה חסרים',
+        fields: ['name', 'email', 'message']
+      });
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        error: 'כתובת אימייל לא תקינה'
+      });
+    }
+
+    // Save to database (example)
+    // await saveContactMessage({ name, email, phone, message });
+
+    // Send email notification (example)
+    // await sendEmailNotification({ name, email, phone, message });
+
+    res.status(200).json({
+      success: true,
+      message: 'ההודעה נשלחה בהצלחה'
+    });
+
+  } catch (error) {
+    console.error('Error processing contact form:', error);
+    res.status(500).json({
+      error: 'שגיאה בשרת, נסה שוב מאוחר יותר'
+    });
+  }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: 'שגיאה בשרת',
+    message: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'נתיב לא נמצא',
+    path: req.path
+  });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+});
+
+module.exports = app;
+```
+
+### Database Connection (PostgreSQL)
+
+```javascript
+// db/connection.js
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
+
+// Test connection
+pool.on('connect', () => {
+  console.log('Connected to PostgreSQL database');
+});
+
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
+});
+
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+  getClient: () => pool.connect(),
+};
+```
+
+### Database Models
+
+```javascript
+// models/Contact.js
+const db = require('../db/connection');
+
+class Contact {
+  static async create({ name, email, phone, message }) {
+    const query = `
+      INSERT INTO contacts (name, email, phone, message, created_at)
+      VALUES ($1, $2, $3, $4, NOW())
+      RETURNING *
+    `;
+    
+    const values = [name, email, phone, message];
+    const result = await db.query(query, values);
+    return result.rows[0];
+  }
+
+  static async findAll(limit = 50, offset = 0) {
+    const query = `
+      SELECT * FROM contacts
+      ORDER BY created_at DESC
+      LIMIT $1 OFFSET $2
+    `;
+    
+    const result = await db.query(query, [limit, offset]);
+    return result.rows;
+  }
+
+  static async findById(id) {
+    const query = 'SELECT * FROM contacts WHERE id = $1';
+    const result = await db.query(query, [id]);
+    return result.rows[0];
+  }
+
+  static async delete(id) {
+    const query = 'DELETE FROM contacts WHERE id = $1 RETURNING *';
+    const result = await db.query(query, [id]);
+    return result.rows[0];
+  }
+}
+
+module.exports = Contact;
+```
+
+### Email Service
+
+```javascript
+// services/email.js
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransporter({
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_PORT === '465',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+async function sendContactNotification({ name, email, phone, message }) {
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: process.env.ADMIN_EMAIL,
+    subject: `הודעה חדשה מ-${name}`,
+    html: `
+      <!DOCTYPE html>
+      <html dir="rtl" lang="he">
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: Arial, sans-serif; direction: rtl; text-align: right; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #0066CC; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+          .content { background: #f5f5f5; padding: 20px; }
+          .field { margin-bottom: 15px; }
+          .label { font-weight: bold; color: #333; }
+          .value { color: #666; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h2>הודעה חדשה מטופס יצירת קשר</h2>
+          </div>
+          <div class="content">
+            <div class="field">
+              <div class="label">שם:</div>
+              <div class="value">${name}</div>
+            </div>
+            <div class="field">
+              <div class="label">אימייל:</div>
+              <div class="value">${email}</div>
+            </div>
+            ${phone ? `
+            <div class="field">
+              <div class="label">טלפון:</div>
+              <div class="value">${phone}</div>
+            </div>
+            ` : ''}
+            <div class="field">
+              <div class="label">הודעה:</div>
+              <div class="value">${message}</div>
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error;
+  }
+}
+
+async function sendConfirmationEmail({ name, email }) {
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: email,
+    subject: 'אישור קבלת הודעה',
+    html: `
+      <!DOCTYPE html>
+      <html dir="rtl" lang="he">
+      <head>
+        <meta charset="UTF-8">
+      </head>
+      <body style="font-family: Arial, sans-serif; direction: rtl; text-align: right;">
+        <h2>שלום ${name},</h2>
+        <p>תודה שיצרת איתנו קשר!</p>
+        <p>קיבלנו את הודעתך ונחזור אליך בהקדם האפשרי.</p>
+        <p>בברכה,<br>צוות האתר</p>
+      </body>
+      </html>
+    `,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Confirmation email sent:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('Error sending confirmation email:', error);
+    throw error;
+  }
+}
+
+module.exports = {
+  sendContactNotification,
+  sendConfirmationEmail,
+};
+```
+
+## Next.js API Routes
+
+### Contact Form API (App Router)
+
+```typescript
+// app/api/contact/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { ratelimit } from '@/lib/rate-limit';
+import { sendContactNotification } from '@/lib/email';
+
+// Validation schema
+const contactSchema = z.object({
+  name: z.string().min(2, 'שם חייב להכיל לפחות 2 תווים'),
+  email: z.string().email('כתובת אימייל לא תקינה'),
+  phone: z.string().regex(/^05\d{8}$/, 'מספר טלפון לא תקין').optional(),
+  message: z.string().min(10, 'הודעה חייבת להכיל לפחות 10 תווים'),
+});
+
+export async function POST(request: NextRequest) {
+  try {
+    // Rate limiting
+    const ip = request.ip ?? 'anonymous';
+    const { success, limit, reset, remaining } = await ratelimit.limit(ip);
+
+    if (!success) {
+      return NextResponse.json(
+        { error: 'יותר מדי בקשות, נסה שוב מאוחר יותר' },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': limit.toString(),
+            'X-RateLimit-Remaining': remaining.toString(),
+            'X-RateLimit-Reset': reset.toString(),
+          }
+        }
+      );
+    }
+
+    // Parse and validate body
+    const body = await request.json();
+    const validatedData = contactSchema.parse(body);
+
+    // Save to database
+    // await db.contact.create({ data: validatedData });
+
+    // Send email notification
+    await sendContactNotification(validatedData);
+
+    return NextResponse.json(
+      { 
+        success: true,
+        message: 'ההודעה נשלחה בהצלחה' 
+      },
+      { status: 200 }
+    );
+
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { 
+          error: 'שגיאה בנתונים שהוזנו',
+          details: error.errors 
+        },
+        { status: 400 }
+      );
+    }
+
+    console.error('Contact form error:', error);
+    return NextResponse.json(
+      { error: 'שגיאה בשרת, נסה שוב מאוחר יותר' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  return NextResponse.json(
+    { error: 'Method not allowed' },
+    { status: 405 }
+  );
+}
+```
+
+### Rate Limiting Utility
+
+```typescript
+// lib/rate-limit.ts
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+export const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, '1 m'), // 10 requests per minute
+  analytics: true,
+  prefix: 'ratelimit',
+});
+```
+
+## Database Migrations
+
+```sql
+-- migrations/001_create_contacts_table.sql
+CREATE TABLE IF NOT EXISTS contacts (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(20),
+  message TEXT NOT NULL,
+  status VARCHAR(50) DEFAULT 'new',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_contacts_email ON contacts(email);
+CREATE INDEX idx_contacts_created_at ON contacts(created_at DESC);
+
+-- Trigger to update updated_at
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = CURRENT_TIMESTAMP;
+  RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_contacts_updated_at 
+  BEFORE UPDATE ON contacts 
+  FOR EACH ROW 
+  EXECUTE FUNCTION update_updated_at_column();
+```
+
+## Authentication Example (JWT)
+
+```javascript
+// middleware/auth.js
+const jwt = require('jsonwebtoken');
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+  if (!token) {
+    return res.status(401).json({ error: 'נדרשת הזדהות' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'טוקן לא תקין' });
+    }
+
+    req.user = user;
+    next();
+  });
+}
+
+function generateToken(user) {
+  return jwt.sign(
+    { id: user.id, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: '24h' }
+  );
+}
+
+module.exports = { authenticateToken, generateToken };
+```
+
+## Logging
+
+```javascript
+// utils/logger.js
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.errors({ stack: true }),
+    winston.format.json()
+  ),
+  defaultMeta: { service: 'web-app' },
+  transports: [
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/combined.log' }),
+  ],
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.colorize(),
+      winston.format.simple()
+    ),
+  }));
+}
+
+module.exports = logger;
+```
+
+## Deployment Checklist
+
+```markdown
+# Pre-Deployment Checklist
+
+## Code Quality
+- [ ] All tests passing
+- [ ] ESLint warnings resolved
+- [ ] Code reviewed
+- [ ] No console.logs in production code
+- [ ] Dependencies updated and audited
+
+## Performance
+- [ ] Lighthouse scores > 90
+- [ ] Images optimized
+- [ ] CSS/JS minified
+- [ ] Lazy loading implemented
+- [ ] Caching configured
+
+## Security
+- [ ] Environment variables configured
+- [ ] HTTPS enabled
+- [ ] Security headers set
+- [ ] Rate limiting enabled
+- [ ] Input validation implemented
+- [ ] SQL injection prevention
+- [ ] XSS prevention
+
+## SEO
+- [ ] Meta tags present
+- [ ] Sitemap.xml generated
+- [ ] Robots.txt configured
+- [ ] Structured data added
+- [ ] Canonical URLs set
+
+## Accessibility
+- [ ] Axe DevTools checks passed
+- [ ] Keyboard navigation works
+- [ ] Screen reader tested
+- [ ] WCAG 2.1 AA compliant
+
+## Monitoring
+- [ ] Error tracking configured (Sentry)
+- [ ] Analytics setup (GA4)
+- [ ] Uptime monitoring
+- [ ] Performance monitoring
+- [ ] Logs aggregation
+
+## Documentation
+- [ ] README updated
+- [ ] API docs current
+- [ ] Environment variables documented
+- [ ] Deployment process documented
+```
