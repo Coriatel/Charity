@@ -62,7 +62,7 @@ body {
     display: flex;
     gap: 30px;
     margin-bottom: 40px;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .hero-column {
@@ -77,11 +77,12 @@ body {
 
 /* HERO section */
 .hero-headline {
-    font-size: 2.5em;
+    font-size: 3em;
     color: #2c3e50;
     margin-bottom: 20px;
-    line-height: 1.3;
+    line-height: 1.2;
     text-align: right;
+    white-space: nowrap;
 }
 
 .hero-media-placeholder {
@@ -107,6 +108,19 @@ body {
     margin-bottom: 20px;
     font-size: 1.1em;
     text-align: right;
+}
+
+/* Story Section - Full Width */
+.story-section {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.story-section p {
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #2c3e50;
 }
 
 /* Goals box */
@@ -327,16 +341,11 @@ body {
 
 /* Unified Info Section */
 .unified-info-section {
-    background: white;
+    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     margin-bottom: 40px;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 40px;
-    align-items: start;
-    border: 2px solid #1e88e5;
 }
 
 .info-content {
@@ -346,7 +355,7 @@ body {
 .info-block {
     margin-bottom: 40px;
     padding-bottom: 30px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
 .info-block:last-child {
@@ -357,7 +366,7 @@ body {
 
 .info-block h2 {
     font-size: 1.6em;
-    color: #2c3e50;
+    color: white;
     margin-bottom: 15px;
 }
 
@@ -365,6 +374,7 @@ body {
     font-size: 1.05em;
     line-height: 1.8;
     margin-bottom: 15px;
+    color: white;
 }
 
 .info-block ul {
@@ -376,32 +386,12 @@ body {
     font-size: 1.05em;
     margin-bottom: 10px;
     line-height: 1.6;
+    color: white;
 }
 
-.info-visuals {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 20px;
-}
-
-.visual-icon {
-    width: 100px;
-    height: 100px;
-    opacity: 0.9;
-    transition: all 0.3s ease;
-}
-
-.visual-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-.visual-icon:hover {
-    opacity: 1;
-    transform: scale(1.1);
+.info-block strong {
+    color: white;
+    font-weight: bold;
 }
 
 /* Final CTA */
@@ -445,6 +435,7 @@ body {
     
     .hero-headline {
         font-size: 1.8em;
+        white-space: normal;
     }
     
     .hero-media-placeholder {
@@ -485,19 +476,11 @@ body {
     }
     
     .unified-info-section {
-        grid-template-columns: 1fr;
         padding: 25px;
-        gap: 30px;
     }
 
-    .info-visuals {
-        flex-direction: row;
-        gap: 30px;
-        padding-top: 0;
-    }
-
-    .visual-icon {
-        font-size: 3em;
+    .story-section p {
+        font-size: 1.1em;
     }
     
     .final-cta h1 {
