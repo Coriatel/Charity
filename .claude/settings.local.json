@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(dir:*)",
+      "Bash(start \"\" \"C:\\Users\\User\\Desktop\\פיתוח\\charity\\Charity-1\\index.html\")",
+      "Bash(start \"\" \"C:\\Users\\User\\Desktop\\פיתוח\\charity\\charity2\\neshama_index.html\")",
+      "Bash(powershell -Command \"Start-Process ''C:\\Users\\User\\Desktop\\פיתוח\\charity\\Charity-1\\index.html''\")",
+      "Bash(powershell -Command \"Start-Process ''C:\\Users\\User\\Desktop\\פיתוח\\charity\\charity2\\neshama_index.html''\")",
+      "Bash(powershell -Command \"Start-Process ''C:\\Users\\User\\Desktop\\פיתוח\\charity\\Charity\\index.html''\")",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
