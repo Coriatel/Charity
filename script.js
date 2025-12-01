@@ -46,18 +46,46 @@ async function fetchCollectedAmount() {
 }
 
 /**
+ * Initialize tabs functionality
+ */
+function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            const activeContent = document.querySelector(`.tab-content[data-tab="${targetTab}"]`);
+            if (activeContent) {
+                activeContent.classList.add('active');
+            }
+        });
+    });
+}
+
+/**
  * Initialize the page when DOM is fully loaded
  */
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Page loaded, fetching collected amount...");
-    
+
     // Fetch the collected amount from Google Sheets
     fetchCollectedAmount();
-    
+
+    // Initialize tabs
+    initTabs();
+
     // Optional: Refresh data every 5 minutes (300000 ms)
     // Uncomment the line below if you want automatic updates
     // setInterval(fetchCollectedAmount, 300000);
-    
+
     // CTA buttons are now proper links to Takbull payment page
     console.log("All CTA buttons are linked to: https://paypage.takbull.co.il/6Fn8c");
 });
