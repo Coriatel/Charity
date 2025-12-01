@@ -345,10 +345,10 @@ body {
 
 /* Unified Info Section */
 .unified-info-section {
-    background: linear-gradient(135deg, #1e88e5 0%, #1976d2 50%, #1565c0 100%);
+    background: white;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     margin-bottom: 40px;
 }
 
@@ -359,7 +359,7 @@ body {
 .info-block {
     margin-bottom: 40px;
     padding-bottom: 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .info-block:last-child {
@@ -370,7 +370,7 @@ body {
 
 .info-block h2 {
     font-size: 1.6em;
-    color: white;
+    color: #2c3e50;
     margin-bottom: 15px;
 }
 
@@ -378,7 +378,7 @@ body {
     font-size: 1.05em;
     line-height: 1.8;
     margin-bottom: 15px;
-    color: white;
+    color: #555;
 }
 
 .info-block ul {
@@ -390,11 +390,11 @@ body {
     font-size: 1.05em;
     margin-bottom: 10px;
     line-height: 1.6;
-    color: white;
+    color: #555;
 }
 
 .info-block strong {
-    color: white;
+    color: #2c3e50;
     font-weight: bold;
 }
 
