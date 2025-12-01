@@ -37,6 +37,13 @@ body {
     padding: 5px;
 }
 
+.bh {
+    font-size: 1.2em;
+    color: white;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
 .site-title {
     color: white;
     font-size: 1.8em;
@@ -60,12 +67,12 @@ body {
 
 .hero-column {
     flex: 1.5;
-    order: 2;
+    order: 1;
 }
 
 .goals-column {
     flex: 1;
-    order: 1;
+    order: 2;
 }
 
 /* HERO section */
@@ -381,9 +388,15 @@ body {
 }
 
 .visual-icon {
-    font-size: 4em;
-    opacity: 0.7;
+    width: 100px;
+    height: 100px;
+    opacity: 0.9;
     transition: all 0.3s ease;
+}
+
+.visual-icon svg {
+    width: 100%;
+    height: 100%;
 }
 
 .visual-icon:hover {
@@ -395,7 +408,7 @@ body {
 .final-cta {
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(135deg, #1e88e5 0%, #d32f2f 100%);
+    background: linear-gradient(135deg, #1e88e5 0%, #0f6c74 50%, #d48a3a 100%);
     border-radius: 15px;
     margin-bottom: 40px;
 }
