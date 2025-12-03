@@ -398,6 +398,33 @@ body {
     font-weight: bold;
 }
 
+/* Phone numbers styling */
+.phone-numbers {
+    margin-top: 15px;
+}
+
+.phone-number {
+    display: block;
+    font-size: 1.15em;
+    font-weight: bold;
+    color: #1e88e5;
+    margin: 8px 0;
+    direction: ltr;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.phone-number a {
+    color: #1e88e5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.phone-number a:hover {
+    color: #1565c0;
+    text-decoration: underline;
+}
+
 /* Final CTA */
 .final-cta {
     text-align: center;
@@ -421,27 +448,54 @@ body {
 
 /* Mobile responsive */
 @media (max-width: 768px) {
+    /* Header fixes for mobile */
+    .site-header {
+        padding: 15px 0;
+    }
+
+    .header-content {
+        padding: 0 15px;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .site-logo {
+        height: 40px;
+    }
+
+    .bh {
+        font-size: 1em;
+        margin-left: 8px;
+    }
+
+    .site-title {
+        font-size: 1.1em;
+        flex: 1 1 100%;
+        text-align: center;
+        line-height: 1.3;
+    }
+
     .top-section {
         flex-direction: column;
     }
-    
+
     .hero-column {
         order: 1;
     }
-    
+
     .goals-column {
         order: 2;
     }
-    
+
     .goals-box {
         position: static;
     }
-    
+
     .hero-headline {
         font-size: 1.8em;
         white-space: normal;
     }
-    
+
     .hero-media-placeholder {
         max-height: 250px;
     }
@@ -449,36 +503,36 @@ body {
     .hero-image {
         max-height: 250px;
     }
-    
+
     .intro-text p {
         font-size: 1em;
     }
-    
+
     .collected-amount {
         font-size: 2.2em;
     }
-    
+
     .full-section {
         padding: 25px;
     }
-    
+
     .full-section h2 {
         font-size: 1.5em;
     }
-    
+
     .full-section p,
     .full-section li {
         font-size: 1em;
     }
-    
+
     .goals-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .goal-box h3 {
         font-size: 1.2em;
     }
-    
+
     .unified-info-section {
         padding: 25px;
     }
@@ -487,18 +541,25 @@ body {
         font-size: 1.2em;
         font-weight: 500;
     }
-    
+
     .final-cta h1 {
         font-size: 1.4em;
     }
-    
+
     .cta-button {
         font-size: 1.1em;
         padding: 15px 25px;
     }
-    
+
     .cta-button.large {
         font-size: 1.2em;
         padding: 18px 30px;
+    }
+
+    /* Phone numbers mobile styling */
+    .phone-number {
+        font-size: 1.2em;
+        margin: 12px 0;
+        text-align: center;
     }
 }
